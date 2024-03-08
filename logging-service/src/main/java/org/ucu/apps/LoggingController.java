@@ -8,20 +8,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 @RestController
-public class LoggingControler {
-    Logger logger = Logger.getLogger(LoggingControler.class.getName());
+public class LoggingController {
+    Logger logger = Logger.getLogger(LoggingController.class.getName());
 
-    private final Map<UUID, String> messages = new ConcurrentHashMap<>();
+    private final LoggingService loggingService;
+
+    public LoggingController(LoggingService loggingService) {
+        this.loggingService = loggingService;
+    }
 
 
     @GetMapping("/logging")
-    public String getMessagesTexts() {
+    public String getMessages() {
+        Map<UUID, String> messages = loggingService.getMessages();
         return messages.values().toString();
     }
 
@@ -30,9 +34,9 @@ public class LoggingControler {
         if (message == null) {
             logger.log(Level.WARNING, "Received null message");
             return ResponseEntity.badRequest().build();
-        }else {
-            logger.info("Received message: " + message);
-            messages.put(message.id(), message.text());
+        } else {
+            logger.info("Received message: " + message.text());
+            loggingService.logMessage(message);
             return ResponseEntity.ok().build();
         }
     }
