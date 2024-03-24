@@ -1,24 +1,20 @@
 package org.ucu.apps;
 
 import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.map.IMap;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class LoggingService {
-    private final HazelcastInstance hzInstance = Hazelcast.newHazelcastInstance();
-    private Map<UUID, String> messages = hzInstance.getMap("messages");
+    private IMap<UUID, String> messages = Hazelcast.newHazelcastInstance().getMap("messages");
 
     public void logMessage(Message message) {
         messages.put(message.id(), message.text());
     }
 
-    public Map<UUID, String> getMessages() {
+    public IMap<UUID, String> getMessages() {
         return messages;
     }
-
-
 }

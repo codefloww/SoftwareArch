@@ -18,9 +18,9 @@
     </properties>
 
     <dependencies>
-<dependency>
+        <dependency>
             <groupId>org.ucu.apps</groupId>
-            <artifactId>facade-service</artifactId>
+            <artifactId>message</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -22,7 +22,7 @@ public class FacadeController {
     }
 
     @PostMapping("/facade_service")
-    public Mono<Void> postMessage(@RequestBody String text) {
+    public Mono<Void> postMessage(@RequestBody String text) throws InterruptedException {
         return facadeService.facadePostMessage(text);
     }
 

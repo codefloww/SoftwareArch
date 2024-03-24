@@ -1,12 +1,12 @@
 package org.ucu.apps;
 
+import com.hazelcast.map.IMap;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +25,7 @@ public class LoggingController {
 
     @GetMapping("/logging")
     public String getMessages() {
-        Map<UUID, String> messages = loggingService.getMessages();
+        IMap<UUID, String> messages = loggingService.getMessages();
         return messages.values().toString();
     }
 

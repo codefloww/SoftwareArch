@@ -18,6 +18,7 @@
         <module>facade-service</module>
         <module>logging-service</module>
         <module>messages-services</module>
+        <module>message</module>
     </modules>
     <properties>
         <java.version>21</java.version>
